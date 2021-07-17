@@ -4,7 +4,16 @@
 
 # chocolatey-zoe
 
-[Chocolatey](https://chocolatey.org)  package source to install [zoe](https://adevinta.github.io/zoe/).
+[Chocolatey](https://chocolatey.org) package source to install [zoe](https://adevinta.github.io/zoe/).
+
+# Zoe install on Windows
+
+Now, the install process on windows is as easy as :
+
+```
+sdk install java
+choco install zoe
+```
 
 # Prerequisite
 
