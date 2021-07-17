@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/9q0etvjntfvth34b?svg=true)](https://ci.appveyor.com/project/adriens/chocolatey-zoe)
 [![Chocolatey](https://img.shields.io/chocolatey/v/zoe.svg)](https://chocolatey.org/packages/zoe)
 [![Chocolatey](https://img.shields.io/chocolatey/dt/zoe.svg)](https://chocolatey.org/packages/zoe)
 
