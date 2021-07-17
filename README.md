@@ -7,6 +7,13 @@
 
 [Chocolatey](https://chocolatey.org) package source to install [zoe](https://adevinta.github.io/zoe/).
 
+# About Zoe
+
+Zoe is a command line tool to interact with kafka in an easy and intuitive way. Wanna see this in action ? check out
+this demo...
+
+[![demo](https://asciinema.org/a/vSDNcUUaMMBkWxCSDD8u3s0No.svg)](https://asciinema.org/a/vSDNcUUaMMBkWxCSDD8u3s0No?speed=2.5&rows=35)
+
 # Zoe install on Windows
 
 Now, the install process on windows is as easy as :
