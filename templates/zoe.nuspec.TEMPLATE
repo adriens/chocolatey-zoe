@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+           DO NOT HARDCODE THIS FILE WITH DYNAMIC VARIABLES : THIS FILE IS A TEMPLATE
+		   THAT IS PROCESSED BY AN ant build.
+-->
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>zoe</id>
+    <title>Zoe</title>
+    <version>@ZOE_VERSION@</version>
+    <authors>Walid Lezzar</authors>
+    <owners>Adrien Sales</owners>
+    <summary>The Kafka CLI for humans.</summary>
+    <description>Zoe is a command line tool to interact with kafka in an easy and intuitive way.
+    Zoe really shines when it comes to interacting with cloud hosted kafka clusters (kubernetes,
+     AWS, etc.) due to its ability to offload consumption and execution to kubernetes pods or
+     lambda functions (more runners will be supported in the future).
+
+    Key features
+
+    Here are some of the most interesting features of zoe :
+
+    Supports offloading consumption of data to lambda functions, kubernetes pods, etc. for parallelism
+    Consume kafka topics from a specific point in time
+    Filter data based on content
+    Monitor consumer groups' offsets
+    Upload avro schemas from a .avsc or .avdl file using different naming strategies
+    ... and more.
+    </description>
+    <projectUrl>https://adevinta.github.io/zoe/</projectUrl>
+    <tags>kotlin kubernetes k8s cli kafka consumer producer topic devops</tags>
+    <licenseUrl>https://github.com/adevinta/zoe/blob/master/LICENSE.md</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.statically.io/gh/adriens/chocolatey-zoe/master/zoe_logo.png</iconUrl>
+    <releaseNotes>https://github.com/adevinta/zoe/releases/tag/v@ZOE_VERSION@</releaseNotes>
+    <docsUrl>https://adevinta.github.io/zoe/</docsUrl>
+    <bugTrackerUrl>https://github.com/adevinta/zoe/issues</bugTrackerUrl>
+    <!--<mailingListUrl></mailingListUrl>-->
+    <packageSourceUrl>https://github.com/adriens/chocolatey-zoe</packageSourceUrl>
+    <projectSourceUrl>https://github.com/adevinta/zoe</projectSourceUrl>
+    <dependencies>
+        <!--<dependency id="jdk11"/>-->
+    </dependencies>
+  </metadata>
+  
+  <files>
+    <file src="tools\**" target="tools\" />
+  </files>
+
+</package>

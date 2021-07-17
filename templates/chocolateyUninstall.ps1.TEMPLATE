@@ -1,0 +1,6 @@
+﻿$tools = Split-Path $MyInvocation.MyCommand.Definition
+$package = Split-Path $tools
+$zoe_home = Join-Path $package 'zoe-'
+$zoe_bat = Join-Path $zoe_home 'bin/zoe.bat'
+
+Uninstall-BinFile -Name 'zoe' -Path $zoe_home

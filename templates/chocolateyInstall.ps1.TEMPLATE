@@ -1,0 +1,22 @@
+﻿$tools = Split-Path $MyInvocation.MyCommand.Definition
+$package = Split-Path $tools
+$zoe_home = Join-Path $package 'zoe'
+$zoe_bat = Join-Path $zoe_home 'bin/zoe.bat'
+
+
+Install-ChocolateyZipPackage `
+    -PackageName 'zoe' `
+    -Url 'https://github.com/adevinta/zoe/releases/download/v@ZOE_VERSION@/zoe-@ZOE_VERSION@.zip' `
+    -Checksum '@SHA512@' `
+    -ChecksumType 'SHA512' `
+    -UnzipLocation $package
+
+Install-ChocolateyEnvironmentVariable `
+    -VariableName 'ZOE_HOME' `
+    -VariableValue $zoe_home `
+    -VariableType 'Machine'
+
+
+Install-BinFile -Name 'zoe' -Path $zoe_bat
+
+Update-SessionEnvironment

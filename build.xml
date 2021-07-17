@@ -1,0 +1,114 @@
+<?xml version = "1.0"?>
+<project name = "Zoe chocolatey package build helper" 
+         default = "info">
+    <target name = "info"
+            description="Show some infos abot this build file." depends="load.properties">
+        <echo>Ant build that helps preparing zoe chocolatey releases.</echo>
+    </target>
+   
+    <target name="load.properties"
+            description = "Load external parametrized properties.">
+        <loadproperties>
+            <file file="zoe.properties"/>
+        </loadproperties>
+        <echo>Zoe target version : &lt;${zoe.version}&gt;</echo>
+    </target>
+   
+    <target name = "clean" description="Clean all build result files.">
+        <echo>Cleaning generated NUGETS generated package (nupkg) and other dynamic build files like *.ps1.</echo>
+        <delete>
+            <fileset dir="." includes="*.nupkg"/>
+            <fileset dir="." includes="*.nuspec"/>
+            <fileset dir="." includes="**/*.ps1"/>
+        </delete>
+    </target>
+   
+    <target name="get.sha512"
+            depends="load.properties"
+            description="Get the SHA512 checksum from Zoe Github official release.">
+
+        <get src="https://github.com/adevinta/zoe/releases/download/v${zoe.version}/zoe-${zoe.version}.zip"
+             dest="work/zoe-${zoe.version}.zip"/>
+        <checksum file="work/zoe-${zoe.version}.zip"
+            algorithm="SHA-512"
+            property="zoe.checksum"/>
+        <echo>Zoe checksum : &lt;${zoe.checksum}&gt;</echo>
+    </target>
+    
+    <target name="prepare.build.files"
+            description="Inject dynamic variables in chocolatey build files."
+            depends="get.sha512">
+        <echo>Preparing &lt;zoe.nuspec&gt; file : injecting zoe version...</echo>
+        <copy file="templates/zoe.nuspec.TEMPLATE" tofile="zoe.nuspec"/>
+        <echo>Injecting target schemacrawler version in nuspec file...</echo>
+        <replace file="zoe.nuspec" token="@ZOE_VERSION@" value="${zoe.version}"/>
+        <echo>nuspec file prepared.</echo>
+        
+        <echo>Preparing &lt;chocolateyInstall.ps1&gt; ...</echo>
+        <copy file="templates/chocolateyInstall.ps1.TEMPLATE" tofile="tools/chocolateyInstall.ps1"/>
+        <replace file="tools/chocolateyInstall.ps1" token="@ZOE_VERSION@" value="${zoe.version}"/>
+        <replace file="tools/chocolateyInstall.ps1" token="@SHA512@" value="${zoe.checksum}"/>
+        <echo>&lt;chocolateyInstall.ps1&gt; file prepared.</echo>
+        
+        <echo>Preparing &lt;chocolateyUninstall.ps1&gt; ...</echo>
+        <copy file="templates/chocolateyUninstall.ps1.TEMPLATE" tofile="tools/chocolateyUninstall.ps1"/>
+        <replace file="tools/chocolateyUninstall.ps1" token="@ZOE_VERSION@" value="${zoe.version}"/>
+        <echo>&lt;chocolateyUninstall.ps1&gt; file prepared.</echo>
+        
+		<echo>Preparing &lt;release.ps1&gt; ...</echo>
+        <copy file="templates/release.ps1.TEMPLATE" tofile="release.ps1"/>
+        <replace file="release.ps1" token="@ZOE_VERSION@" value="${zoe.version}"/>
+        <echo>&lt;release.ps1&gt; file prepared.</echo>
+    </target>
+    
+    <target name="prepare"
+            description="Prepare all the files required to run a &lt;choco install -fdv zoe.nuspec&gt;"
+            depends="clean,prepare.build.files">
+        <echo>Ready to run choco build :</echo>
+        <echo>choco install -fdv zoe.nuspec</echo>
+    </target>
+    
+    <target name="make" 
+            depends="prepare"
+            description="Build AND INSTALL zoe from the locally built chocolatey package.">
+            <exec executable="cmd">
+                <arg value="/c"/>
+                <arg value="choco install --yes -fdv zoe.nuspec"/>
+            </exec>
+            
+            <echo>Release command :</echo>
+            <echo>choco push zoe.${zoe.version}.nupkg -s https://chocolatey.org/ -apikey *******</echo>
+    </target>
+	
+	<target name="get-release-command" 
+            depends="load.properties"
+            description="Just get the release command.">
+            <echo>Release command :</echo>
+            <echo>choco push zoe.${zoe.version}.nupkg -s https://chocolatey.org/ -apikey %CHOCO_APIKEY%</echo>
+    </target>
+	
+	<target name="get-ps1-command" 
+            depends="load.properties"
+            description="Just get the release command.">
+            <echo>Release command :</echo>
+            <echo>choco push zoe.${zoe.version}.nupkg -s https://chocolatey.org/ -apikey %CHOCO_APIKEY%</echo>
+    </target>
+    
+    <target name="choco-uninstall" 
+            depends="clean"
+            description="Uninstall zoe.">
+            <exec executable="cmd">
+                <arg value="/c"/>
+                <arg value="choco uninstall --yes zoe"/>
+            </exec>
+    </target>
+    
+    <target name="choco-install" 
+            depends="clean"
+            description="Install zoe from central chocolatey repo.">
+            <exec executable="cmd">
+                <arg value="/c"/>
+                <arg value="choco install zoe"/>
+            </exec>
+    </target>
+</project>
