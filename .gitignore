@@ -1,3 +1,4 @@
 /work/*.zip
 /*.ps1
 /zoe.nuspec
+/tools/*.ps1
