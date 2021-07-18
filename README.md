@@ -14,6 +14,18 @@ this demo...
 
 [![demo](https://asciinema.org/a/vSDNcUUaMMBkWxCSDD8u3s0No.svg)](https://asciinema.org/a/vSDNcUUaMMBkWxCSDD8u3s0No?speed=2.5&rows=35)
 
+# Zoe resources
+
+Here are the resources that made me adopt Zoe... and write a [chocolatey package](https://community.chocolatey.org/packages/zoe/) to help Windows collaborators install it easier :
+
+- [Dedicated Medium article](https://medium.com/adevinta-tech-blog/zoe-the-kafka-cli-for-humans-3e01584d0d3f)
+- The [Dedicated KataCoda Course](https://www.katacoda.com/wlezzar/courses/zoe)
+- Of course [official GH repo](https://github.com/adevinta/zoe)
+- [Zoe's Official website](https://adevinta.github.io/zoe/)
+
+Hopefully you'll enjoy this tools as much as I do.
+
+
 # Zoe install on Windows
 
 Now, the install process on windows is as easy as :
