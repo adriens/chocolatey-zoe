@@ -86,4 +86,14 @@ Upgrade process:
 3. Install locally `choco install -fdv zoe.nuspec`
 4. Test command line `zoe --version`
 
+# For maintainer
 
+**NB : Ths section explains how to release new zoe versions.**
+
+The whole chocolatey process has been automated, hence, releaing a new version requires very vew efforts :
+
+1. Change targte version in `zoe.properties`
+2. Push the commit to the master branch to see if it builds the right way : [check Appveyor](https://ci.appveyor.com/project/adriens/chocolatey-zoe) badge for that
+3. To push the release to chocolatey, simply create a release on this GH repo and wait for [AppVeyor](https://ci.appveyor.com/project/adriens/chocolatey-zoe) to end
+4. Let chocolatey moderation do the job, and update the progress on the [release pipe project](https://github.com/adriens/chocolatey-zoe/projects/1)
+5. On each choco moderation step, {keep the issue up-to-date](https://github.com/adriens/chocolatey-zoe/issues/2) so you keep track of the moderation processs 
