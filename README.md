@@ -86,7 +86,7 @@ Upgrade process:
 3. Install locally `choco install -fdv zoe.nuspec`
 4. Test command line `zoe --version`
 
-# For maintainer
+# For maintainers
 
 **NB : Ths section explains how to release new zoe versions.**
 
